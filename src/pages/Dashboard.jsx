@@ -129,16 +129,19 @@ const Dashboard = () => {
     // Filter Logic
     // Filter Logic
     const purchases = orders.filter(order => {
-        const buyerId = order.buyer?._id || order.buyer;
-        return (buyerId?.toString() === user?._id?.toString());
+        const buyerId = order.buyer?._id || order.buyer?.id || order.buyer;
+        const currentId = user?._id || user?.id;
+        return (buyerId?.toString() === currentId?.toString());
     });
 
     const activeOrders = orders.filter(order => {
-        const sellerId = order.seller?._id || order.seller;
-        return (sellerId?.toString() === user?._id?.toString());
+        const sellerId = order.seller?._id || order.seller?.id || order.seller;
+        const currentId = user?._id || user?.id;
+        return (sellerId?.toString() === currentId?.toString());
     });
 
     console.log("Dashboard Debug:", { total: orders.length, purchases: purchases.length, active: activeOrders.length });
+
 
 
     return (
